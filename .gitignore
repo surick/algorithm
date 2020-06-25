@@ -3,6 +3,11 @@
 .idea/
 *.ipr
 *.iws
+*/.settings/
+*.idea
+**/.iml*
+*/target/
+target/
 
 ##----------Other----------
 # osx
@@ -15,3 +20,9 @@ gradle.properties
 *.log
 
 *.class
+
+**/.class
+**/.classpath
+**/.project
+antx.properties
+output/

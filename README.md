@@ -1,2 +1,2 @@
-# algorithm
-learn and practice
+# Algorithm
+Learn and practice algorithms

@@ -1,4 +1,4 @@
-package com.evilcry.algorithms.datastructures;
+package com.evilcry.algorithms.datastructures.trees;
 
 /**
  *

@@ -1,4 +1,4 @@
-package com.evilcry.algorithms.sort;
+package com.evilcry.algorithms.sorts;
 
 /**
  * @author Jin

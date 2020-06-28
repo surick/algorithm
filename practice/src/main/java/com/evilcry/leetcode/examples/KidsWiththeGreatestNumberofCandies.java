@@ -1,6 +1,9 @@
 package com.evilcry.leetcode.examples;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * <a>
@@ -47,6 +50,23 @@ public class KidsWiththeGreatestNumberofCandies {
 
     public List<Boolean> kidsWithCandies(int[] candies, int extraCandies) {
 
-        
+        int max = Arrays.stream(candies).max().getAsInt();
+        return Arrays.stream(candies).mapToObj(candy -> candy + extraCandies >= max).collect(Collectors.toList());
+    }
+
+    public List<Boolean> kidsWithCandies1(int[] candies, int extraCandies) {
+        int max = -1;
+        for (int i = 0; i < candies.length; i++) {
+            max = Math.max(candies[i], max);
+        }
+        List<Boolean> b = new ArrayList<>();
+        for (int i = 0; i < candies.length; i++) {
+            if (candies[i] + extraCandies >= max) {
+                b.add(Boolean.TRUE);
+            } else {
+                b.add(Boolean.FALSE);
+            }
+        }
+        return b;
     }
 }

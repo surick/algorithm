@@ -1,5 +1,9 @@
 package com.evilcry.leetcode.examples;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 /**
  * <a>
  * https://leetcode.com/problems/decompress-run-length-encoded-list/
@@ -37,8 +41,105 @@ package com.evilcry.leetcode.examples;
  */
 public class DecompressRunLengthEncodedList {
 
+    /**
+     * 10 ms
+     *
+     * @param nums
+     * @return
+     */
     public int[] decompressRLElist(int[] nums) {
 
+        List<Integer> res = new ArrayList<>();
+        for (int i = 0; i < nums.length; i += 2) {
 
+            while (nums[i] != 0) {
+
+                res.add(nums[i + 1]);
+                nums[i]--;
+            }
+        }
+
+        int[] array = new int[res.size()];
+        for (int i = 0; i < res.size(); i++) {
+            array[i] = res.get(i);
+        }
+
+        return array;
+    }
+
+
+    public int[] decompressRLElist1(int[] nums) {
+        List<Integer> ans = new ArrayList<>();
+        for (int i = 0; i < nums.length; i += 2)
+            for (int j = 0; j < nums[i]; ++j)
+                ans.add(nums[i + 1]);
+        return ans.stream().mapToInt(i -> i).toArray();
+    }
+
+    public int[] decompressRLElist2(int[] nums) {
+        int arrSize = 0;
+        for (int i = 0; i < nums.length; i += 2) {
+            arrSize += nums[i];
+        }
+
+        int[] result = new int[arrSize];
+
+        int startIdx = 0;
+        for (int i = 0; i < nums.length; i += 2) {
+            Arrays.fill(result, startIdx, startIdx + nums[i], nums[i + 1]);
+            startIdx += nums[i];
+        }
+        return result;
+    }
+
+    public int[] decompressRLElist3(int[] nums) {
+        List<Integer> list = new ArrayList<>();
+        for (int i = 0; i < nums.length; i += 2) {
+            for (int j = 0; j < nums[i]; j++) {
+                list.add(nums[i + 1]);
+            }
+        }
+        int[] res = new int[list.size()];
+        for (int i = 0; i < list.size(); i++) {
+            res[i] = list.get(i);
+        }
+        return res;
+    }
+
+    public int[] decompressRLElist4(int[] nums) {
+        int len = 0;
+        for (int i = 0; i < nums.length; i += 2) {
+            len += nums[i];
+        }
+
+        int[] ans = new int[len];
+        int index = 0;
+        for (int i = 0; 2 * i + 1 < nums.length; i++) {
+            for (int j = 0; j < nums[2 * i]; j++) {
+                ans[index++] = nums[2 * i + 1];
+            }
+        }
+        return ans;
+    }
+
+
+    /**
+     * fast 0ms
+     *
+     * @param nums
+     * @return
+     */
+    public int[] decompressRLElist5(int[] nums) {
+        int size = 0;
+        for (int i = 0, h = nums.length; i < h; i += 2) {
+            size += nums[i];
+        }
+        int[] send = new int[size];
+        for (int i = 0, k = 0, h = nums.length; i < h; i += 2) {
+            int value = nums[i + 1];
+            Arrays.fill(send, k, k + nums[i], value);
+            k += nums[i];
+        }
+        return send;
     }
 }

@@ -1,5 +1,8 @@
 package com.evilcry.leetcode.examples;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * <a>https://leetcode.com/problems/subtract-the-product-and-sum-of-digits-of-an-integer/</a>
  * <p>
@@ -33,8 +36,43 @@ package com.evilcry.leetcode.examples;
  */
 public class SubtracttheProductandSumofDigitsofanInteger {
 
+    /**
+     * 1ms
+     *
+     * @param n
+     * @return
+     */
     public int subtractProductAndSum(int n) {
 
+        String s = Integer.valueOf(n).toString();
 
+        int product = 1, sum = 0;
+        for (char c : s.toCharArray()) {
+            product *= Integer.parseInt(String.valueOf(c));
+            sum += Integer.parseInt(String.valueOf(c));
+        }
+
+        return product - sum;
+    }
+
+    public int subtractProductAndSum1(int n) {
+        int sum = 0, product = 1;
+        while (n > 0) {
+            sum += n % 10;
+            product *= n % 10;
+            n /= 10;
+        }
+        return product - sum;
+    }
+
+    public int subtractProductAndSum2(int n) {
+        int sum = 0, prod = 1;
+        while (n > 0) {
+            int digit = n % 10;
+            sum += digit;
+            prod *= digit;
+            n /= 10;
+        }
+        return prod - sum;
     }
 }
